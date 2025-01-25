@@ -133,14 +133,11 @@ publishing {
 ![gradle-repo](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/gradle-repo.png)
 
 
-### 5. Java Maven Project: Build and Upload
+### 4. Java Maven Project: Build and Upload
 
 The process for Maven is quite similar.
 
 1. **Create a Simple Project:**  I set up a basic Java project with a `pom.xml` file.
-
-    *   **Picture Suggestion:** A screenshot of your Maven project directory structure and/or your simple Java code.
-        *   **Caption:** "Maven project reporting for duty! Simple and ready to go."
 
 2. **Configure `pom.xml`:** I added the `distributionManagement` section to my `pom.xml` to point to my Nexus repository. Again, replace the placeholders.
 
@@ -160,30 +157,26 @@ The process for Maven is quite similar.
 3. **Configure `settings.xml`:**  I added my Nexus credentials to my Maven `settings.xml` file (usually found in `~/.m2/`). This is crucial to avoid putting credentials in every project.
 
     ```xml
+   <settings> 
     <servers>
         <server>
-            <id>nexus-releases</id>
+            <id>nexus-snapshots</id>
             <username><your_nexus_username></username>
             <password><your_nexus_password></password>
         </server>
     </servers>
+   </settings> 
     ```
 
 4. **Build and Deploy:** I used the following Maven commands:
 
     ```bash
-    mvn clean package
+    mvn package
     mvn deploy
     ```
-
-    *   **Picture Suggestion:** A screenshot of your terminal showing the successful output of the `mvn deploy` command.
-        *   **Caption:** "Maven in action – deploying my artifact to Nexus with style."
+![maven-deploy](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/maven-deploy.png)
+    
 
 5. **Verify in Nexus:** Just like with Gradle, I checked Nexus and found my Maven-built artifact happily residing in the repository.
 
-    *   **Picture Suggestion:** A screenshot of your Nexus UI showing your published Maven artifact.
-        *   **Caption:** "Another one in the books! My Maven artifact is now part of the Nexus family."
-
-## Conclusion
-
-And that's it! I successfully set up Nexus on a Droplet, created a user, and published artifacts from both Gradle and Maven projects. It was a great learning experience, and I hope this guide helps you on your own journey into the world of artifact management. Feel free to reach out if you have any questions. Happy coding!
+![maven-nexus](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/maven-nexus.png)
