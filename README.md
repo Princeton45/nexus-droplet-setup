@@ -2,7 +2,7 @@
 
 This project documents my experience setting up a server on DigitalOcean and deploying a Java application built with Gradle.
 
-![Nexus Diagram](https://github.com/Princeton45/Kubernetes-Resume-Challenge/blob/main/images/diagram.png)
+![Nexus Diagram](https://github.com/Princeton45/Kubernetes-Resume-Challenge/blob/main/images/diagram.jpg)
 
 ## Technologies I Used
 
