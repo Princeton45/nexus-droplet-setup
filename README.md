@@ -18,12 +18,14 @@ Here's a summary of the steps I took:
 ### 1. Setting Up My DigitalOcean Droplet
 
 I created a new Droplet on DigitalOcean, choosing Ubuntu as the operating system and adding my SSH key for secure access.
-*   **Image Suggestion:** A screenshot of the Droplet creation page on DigitalOcean.
+
+![Droplet](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/droplet.png)
 
 ### 2. Connecting to My Droplet via SSH
 
 Using my Droplet's IP address, I connected to it from my terminal using the `ssh` command.
-*   **Image Suggestion:** A screenshot of the terminal showing a successful SSH connection.
+
+![Droplet](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/ssh.png)
 
 ### 3. Creating a New Linux User
 
