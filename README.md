@@ -2,7 +2,7 @@
 
 This project documents my experience setting up a server on DigitalOcean and deploying a Java application built with Gradle.
 
-![Nexus Diagram](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/diagram.jpg)
+![Nexus Diagram](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/diagram.png)
 
 ## Technologies I Used
 
