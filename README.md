@@ -9,7 +9,7 @@ In this project, I will be setting up a Nexus repository on a DigitalOcean serve
 *   **Nexus Repository Manager:**
 *   **DigitalOcean:** 
 *   **Linux (Ubuntu):** 
-*   **Java:** T
+*   **Java:**
 *   **Gradle:** 
 *   **Maven:** 
 
