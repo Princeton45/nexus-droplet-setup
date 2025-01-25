@@ -45,10 +45,20 @@ With my server ready, it was time to bring in Nexus. I followed the official Nex
 
 ![serviceacc](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/serviceacc.png)
 
-3. **Access Nexus:** Once Nexus was up, I opened my web browser and navigated to `http://<your_droplet_ip>:8081`. Boom! Nexus was there, waiting for me.
+4. **Setting Nexus Configuration:** Next I set the `nexus-3.76.1-01/bin/nexus.rc`  configuration file so that it will run as a nexus user.
 
-    *   **Picture Suggestion:** A screenshot of your web browser showing the Nexus login page.
-        *   **Caption:** "Hello, Nexus! It's great to see you running on my Droplet."
+![runas](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/runasuser.png)
+
+5. **Starting Nexus service:** I ran the command below to start the nexus service.
+
+`/opt/nexus-3.76.1-01/bin/nexus start`
+
+![nexusrunning](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/nexus-running.png)
+
+
+5. **Access Nexus:** Once Nexus was up, I opened my web browser and navigated to `http:http://159.223.109.89//:8081`. 
+
+![access-nexus](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/access-nexus.png)
 
 4. **Initial Login and Password Change:** I retrieved the initial admin password from the server as indicated on the first login page. Used this to login, and immediately changed the password to something more secure.
 
