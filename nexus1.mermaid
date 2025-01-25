@@ -1,0 +1,71 @@
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '16px', 'fontFamily': 'arial' }}}%%
+graph TB
+    title["Demo Project: Nexus Artifact Repository Setup"]
+    
+    subgraph DO[DigitalOcean Setup]
+        A1["Create Droplet
+        - Ubuntu Linux
+        - Configure Security
+        - Setup Firewall"]
+        A2["Install Dependencies
+        - Java JDK
+        - Required Libraries"]
+    end
+    
+    subgraph NX[Nexus Installation]
+        B1["Install Nexus
+        - Download Nexus
+        - Configure Service
+        - Start Nexus Server"]
+        B2["Configure Nexus
+        - Initial Setup
+        - Create New Users
+        - Set Permissions"]
+        B3["Create Repositories
+        - Maven Repository
+        - Gradle Repository"]
+    end
+    
+    subgraph JAVA[Java Projects]
+        C1["Gradle Project
+        - Create Java App
+        - Configure build.gradle
+        - Build JAR"]
+        
+        C2["Maven Project
+        - Create Java App
+        - Configure pom.xml
+        - Build JAR"]
+    end
+    
+    subgraph PUB[Publish to Nexus]
+        D1["Upload Gradle Artifact
+        - Configure Credentials
+        - Publish JAR"]
+        
+        D2["Upload Maven Artifact
+        - Configure Credentials
+        - Publish JAR"]
+    end
+    
+    A1 --> A2
+    A2 --> B1
+    B1 --> B2
+    B2 --> B3
+    B3 --> C1
+    B3 --> C2
+    C1 --> D1
+    C2 --> D2
+    
+    %% Styling
+    classDef title fill:#f9f9f9,stroke:#333,stroke-width:4px,font-size:18px,font-weight:bold
+    classDef do fill:#e0f7fa,stroke:#006064,font-size:16px
+    classDef nexus fill:#e3f2fd,stroke:#1565c0,font-size:16px
+    classDef java fill:#e8f5e9,stroke:#2e7d32,font-size:16px
+    classDef publish fill:#fff3e0,stroke:#ef6c00,font-size:16px
+    
+    class title title
+    class A1,A2 do
+    class B1,B2,B3 nexus
+    class C1,C2 java
+    class D1,D2 publish

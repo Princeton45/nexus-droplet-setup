@@ -2,6 +2,8 @@
 
 This project documents my experience setting up a server on DigitalOcean and deploying a Java application built with Gradle.
 
+![Nexus Diagram](https://github.com/Princeton45/Kubernetes-Resume-Challenge/blob/main/images/diagram.png)
+
 ## Technologies I Used
 
 *   **DigitalOcean:** For cloud server hosting (a "Droplet").
