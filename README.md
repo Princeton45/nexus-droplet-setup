@@ -56,75 +56,82 @@ With my server ready, it was time to bring in Nexus. I followed the official Nex
 ![nexusrunning](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/nexus-running.png)
 
 
-5. **Access Nexus:** Once Nexus was up, I opened my web browser and navigated to `http:http://159.223.109.89//:8081`. 
+6. **Access Nexus:** Once Nexus was up, I opened my web browser and navigated to `http:http://159.223.109.89//:8081`. 
 
 ![access-nexus](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/access-nexus.png)
 
-4. **Initial Login and Password Change:** I retrieved the initial admin password from the server as indicated on the first login page. Used this to login, and immediately changed the password to something more secure.
 
-### 3. Creating a New Nexus User
-
-I didn't want to use the admin user for everything, so I created a new user specifically for uploading artifacts.
-
-1. **Navigate to User Management:** I went to the "Server Administration and Configuration" section (the gear icon) and then to "User" under the "Security" section.
-2. **Create User:** Clicked on "Create user".
-3. **Set Permissions:** I gave the user the appropriate roles (e.g., `nx-repository-view-*-*-*`, `nx-repository-admin-*-*-*`). You can be more specific, but this allows the user to do everything related to repositories.
-
-    *   **Picture Suggestion:** A screenshot of the Nexus user creation page, showing the fields filled in and the roles assigned.
-        *   **Caption:** "Crafting a new user with just the right powers – no admin overkill here!"
-
-### 4. Java Gradle Project: Build and Upload
+### 3. Java Gradle Project: Build and Upload
 
 Now for the fun part – getting my Java project artifacts into Nexus. I started with a simple Gradle project.
 
-1. **Create a Simple Project:** I created a basic Java project with a `build.gradle` file.
+1. **Creating Nexus user:** In this step, I need to create a Nexus user in the Nexus application because when connecting Gradle and Maven to Nexus, we don't want to use the default admin credentials.
+
+The Nexus user will only have permissions to upload artifact files to particular Nexus repositories.
+
+I created a custom `nx-java` role with the required permissions.
+
+![role](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/role.png)
+
+
+2. **Configuring Maven Gradle to connect to Nexus:** In this step, I need to configure  Gradle to connect to Nexus via the Nexus Repo URL & Credentials
+
+3. **Create a Simple Project:** I created a basic Java project with a `build.gradle` file.
 
     *   **Picture Suggestion:** A screenshot of your project directory structure and/or your simple Java code.
         *   **Caption:** "My humble Java project, ready to be built and shared."
 
-2. **Configure `build.gradle`:** I added the `maven-publish` plugin to my `build.gradle` and configured it to publish to my Nexus repository. Remember to replace placeholders with your Nexus URL and credentials.
+2. **Configure `build.gradle`:** I added the `maven-publish` plugin to my `build.gradle` and configured it to publish to my Nexus repository.
 
-    ```gradle
+```gradle
     plugins {
-        id 'java'
-        id 'maven-publish'
-    }
+    id 'java'
+    id 'org.springframework.boot' version '3.1.0-SNAPSHOT'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
 
-    group = 'com.example'
-    version = '1.0'
+group 'com.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 17
 
-    publishing {
-        publications {
-            myPublication(MavenPublication) {
-                from components.java
-            }
-        }
-        repositories {
-            maven {
-                url 'http://<your_droplet_ip>:8081/repository/maven-releases/' // Your Nexus repo URL
-                credentials {
-                    username = '<your_nexus_username>'
-                    password = '<your_nexus_password>'
-                }
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/my-app-$version"+".jar"){
+                extension 'jar'
             }
         }
     }
-    ```
+
+    repositories {
+        maven {
+            name 'nexus'
+            url "http://159.223.109.89:8081/repository/maven-snapshots/" 
+            allowInsecureProtocol = true
+            credentials {
+                username project.repoUser
+                password project.repoPassword
+            }
+        }
+    }
+}
+```
 
 3. **Build and Publish:** I ran the following Gradle commands:
 
     ```bash
-    ./gradlew build
-    ./gradlew publish
+    gradle build
+    gradlew publish
     ```
+![gradle-publish](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/gradle-publish.png)
 
-    *   **Picture Suggestion:** A screenshot of your terminal showing the successful output of the `./gradlew publish` command.
-        *   **Caption:** "Gradle doing its magic – building and publishing like a champ!"
 
-4. **Verify in Nexus:** I went back to my Nexus UI, browsed the repositories, and there it was – my artifact, safe and sound.
+4. **Verify in Nexus:** I went back to my Nexus UI, browsed the repositories, and there it was, in the `maven-snapshots` repository just as specified.
 
-    *   **Picture Suggestion:** A screenshot of your Nexus UI showing your published artifact in the repository.
-        *   **Caption:** "And there's my artifact, chilling in Nexus. Mission accomplished!"
+![gradle-repo](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/gradle-repo.png)
+
 
 ### 5. Java Maven Project: Build and Upload
 
