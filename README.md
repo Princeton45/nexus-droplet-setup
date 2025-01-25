@@ -30,17 +30,20 @@ Once the Droplet was live, I SSH'd into it using my terminal.
 With my server ready, it was time to bring in Nexus. I followed the official Nexus installation guide. Here's the gist:
 
 1. **Download Nexus:** I grabbed the latest version from the Sonatype website.
-    *   **Picture Suggestion:** A screenshot of the Sonatype downloads page showing the Nexus download link.
-        *   **Caption:** "Grabbing the latest Nexus release from the source."
-2. **Extract & Run:** Unpacked the downloaded file and ran the Nexus startup script.
+
+    https://help.sonatype.com/en/download.html
+
+2. **Extract & Run:** Unpacked the downloaded file and ran the Nexus startup script. I am going to extract the contents in the /opt folder.
 
     ```bash
-    # Example commands (adjust paths as needed)
-    wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz #replace with actual link
-    tar -xvzf latest-unix.tar.gz
-    cd nexus-3.x.x-xx/bin
-    ./nexus start
+    cd /opt
+    wget https://download.sonatype.com/nexus/3/nexus-3.76.1-01-unix.tar.gz 
+    tar -zxvf nexus-3.76.1-01-unix.tar.gz
     ```
+
+3. **Nexus Service Account:** I then created a nexus service account called `nexus-princeton` on the Linux server and made the service account an owner of the nexus and sonatype directory
+
+![serviceacc](https://github.com/Princeton45/nexus-droplet-setup/blob/main/images/serviceacc.png)
 
 3. **Access Nexus:** Once Nexus was up, I opened my web browser and navigated to `http://<your_droplet_ip>:8081`. Boom! Nexus was there, waiting for me.
 
