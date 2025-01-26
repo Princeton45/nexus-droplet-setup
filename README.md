@@ -6,12 +6,12 @@ In this project, I will be setting up a Nexus repository on a DigitalOcean serve
 
 ## Technologies
 
-*   **Nexus Repository Manager:**
-*   **DigitalOcean:** 
-*   **Linux (Ubuntu):** 
-*   **Java:**
-*   **Gradle:** 
-*   **Maven:** 
+*   **Nexus Repository Manager**
+*   **DigitalOcean** 
+*   **Linux (Ubuntu)** 
+*   **Java**
+*   **Gradle** 
+*   **Maven** 
 
 ## Step-by-Step Adventure
 
